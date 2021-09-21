@@ -432,10 +432,10 @@ namespace UnityEngine
         /// <param name="scale">The Perlin Scale factor of the Tile.</param>
         /// <param name="offset">Offset of the Tile on the Tilemap.</param>
         /// <returns>A Perlin Noise value based on the given inputs.</returns>
-        public static float GetPerlinValue(Vector3Int position, float scale, float offset)
+        public static float GetPerlinValue(Vector3Int position, System.Random rand, float offset)
         {
             //return Mathf.PerlinNoise((position.x + offset) * scale, (position.y + offset) * scale);
-            return (float)rand.NextDouble();
+            return (float) rand.NextDouble();
         }
 
         static Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>> m_CacheTilemapsNeighborPositions = new Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>>();
