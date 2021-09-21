@@ -407,7 +407,7 @@ namespace UnityEngine
                             tileData.sprite = rule.m_Sprites[0];
                             break;
                         case TilingRule.OutputSprite.Random:
-                            Random rand = new Random();
+                            System.Random rand = new System.Random();
                             int index = rand.Next(rule.m_Sprites.Length);
                             tileData.sprite = rule.m_Sprites[index];
                             if (rule.m_RandomTransform != TilingRule.Transform.Fixed)
@@ -432,7 +432,7 @@ namespace UnityEngine
         public static float GetPerlinValue(Vector3Int position, float scale, float offset)
         {
             //return Mathf.PerlinNoise((position.x + offset) * scale, (position.y + offset) * scale);
-            Random rand = new Random();
+            System.Random rand = new System.Random();
             return rand.NextDouble();
         }
 
@@ -666,7 +666,7 @@ namespace UnityEngine
         /// <returns>A random transform matrix.</returns>
         public virtual Matrix4x4 ApplyRandomTransform(TilingRule.Transform type, Matrix4x4 original, float perlinScale, Vector3Int position)
         {
-            Random rand = new Random();
+            System.Random rand = new System.Random();
             float perlin = (float) rand.NextDouble();
             switch (type)
             {
