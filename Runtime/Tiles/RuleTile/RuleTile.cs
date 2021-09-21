@@ -56,6 +56,11 @@ namespace UnityEngine
         public int m_RotationCount => 360 / m_RotationAngle;
 
         /// <summary>
+        /// The random number generator for RandomTiles.
+        /// </summary>
+        public System.Random rand = new System.Random();
+
+        /// <summary>
         /// The data structure holding the Rule information for matching Rule Tiles with
         /// its neighbors.
         /// </summary>
@@ -100,7 +105,6 @@ namespace UnityEngine
             /// The randomized transform output for this Rule.
             /// </summary>
             public Transform m_RandomTransform;
-
             /// <summary>
             /// The enumeration for matching Neighbors when matching Rule Tiles
             /// </summary>
@@ -212,7 +216,7 @@ namespace UnityEngine
                 rule.m_RandomTransform = m_RandomTransform;
                 return rule;
             }
-            
+
             /// <summary>
             /// Returns all neighbors of this Tile as a dictionary
             /// </summary>
@@ -407,7 +411,6 @@ namespace UnityEngine
                             tileData.sprite = rule.m_Sprites[0];
                             break;
                         case TilingRule.OutputSprite.Random:
-                            System.Random rand = new System.Random();
                             int index = rand.Next(rule.m_Sprites.Length);
                             tileData.sprite = rule.m_Sprites[index];
                             if (rule.m_RandomTransform != TilingRule.Transform.Fixed)
@@ -432,8 +435,7 @@ namespace UnityEngine
         public static float GetPerlinValue(Vector3Int position, float scale, float offset)
         {
             //return Mathf.PerlinNoise((position.x + offset) * scale, (position.y + offset) * scale);
-            System.Random rand = new System.Random();
-            return (float) rand.NextDouble();
+            return (float)rand.NextDouble();
         }
 
         static Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>> m_CacheTilemapsNeighborPositions = new Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>>();
@@ -506,7 +508,7 @@ namespace UnityEngine
             }
             return false;
         }
-        
+
         static void ReleaseDestroyedTilemapCacheData()
         {
             if (!NeedRelease())
@@ -544,7 +546,7 @@ namespace UnityEngine
                     if (RuleMatches(rule, position, tilemap, ref transform))
                     {
                         tileAnimationData.animatedSprites = rule.m_Sprites;
-                        tileAnimationData.animationSpeed = Random.Range( rule.m_MinAnimationSpeed, rule.m_MaxAnimationSpeed);
+                        tileAnimationData.animationSpeed = Random.Range(rule.m_MinAnimationSpeed, rule.m_MaxAnimationSpeed);
                         return true;
                     }
                 }
@@ -666,8 +668,7 @@ namespace UnityEngine
         /// <returns>A random transform matrix.</returns>
         public virtual Matrix4x4 ApplyRandomTransform(TilingRule.Transform type, Matrix4x4 original, float perlinScale, Vector3Int position)
         {
-            System.Random rand = new System.Random();
-            float perlin = (float) rand.NextDouble();
+            float perlin = (float)rand.NextDouble();
             switch (type)
             {
                 case TilingRule.Transform.MirrorXY:
@@ -728,7 +729,7 @@ namespace UnityEngine
         public bool RuleMatches(TilingRule rule, Vector3Int position, ITilemap tilemap, int angle)
         {
             var minCount = Math.Min(rule.m_Neighbors.Count, rule.m_NeighborPositions.Count);
-            for (int i = 0; i < minCount ; i++)
+            for (int i = 0; i < minCount; i++)
             {
                 int neighbor = rule.m_Neighbors[i];
                 Vector3Int positionOffset = GetRotatedPosition(rule.m_NeighborPositions[i], angle);
