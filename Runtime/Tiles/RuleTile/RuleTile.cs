@@ -433,7 +433,7 @@ namespace UnityEngine
         {
             //return Mathf.PerlinNoise((position.x + offset) * scale, (position.y + offset) * scale);
             System.Random rand = new System.Random();
-            return rand.NextDouble();
+            return (float) rand.NextDouble();
         }
 
         static Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>> m_CacheTilemapsNeighborPositions = new Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>>();
