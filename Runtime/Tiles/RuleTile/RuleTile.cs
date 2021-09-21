@@ -430,7 +430,8 @@ namespace UnityEngine
         /// <returns>A Perlin Noise value based on the given inputs.</returns>
         public static float GetPerlinValue(Vector3Int position, float scale, float offset)
         {
-            return Mathf.PerlinNoise((position.x + offset) * scale, (position.y + offset) * scale);
+            //return Mathf.PerlinNoise((position.x + offset) * scale, (position.y + offset) * scale);
+            return System.Random.NextDouble();
         }
 
         static Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>> m_CacheTilemapsNeighborPositions = new Dictionary<Tilemap, KeyValuePair<HashSet<TileBase>, HashSet<Vector3Int>>>();
